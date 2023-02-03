@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./app/store";
-import { getTodos, Todo } from './todosApi';
+import { deleteTodo, getTodos, Todo, updateTodo, createTodo } from './todosApi';
 
 export interface TodoState {
   todos: Todo[];
@@ -14,7 +14,22 @@ const initialState: TodoState = {
 
 export const getTodosAsync = createAsyncThunk(
   'todos/getTodos',
-  async() => getTodos()
+  async () => getTodos()
+);
+
+export const updateTodoAsync = createAsyncThunk(
+  'todos/updateTodo',
+  async (todo: Todo) => updateTodo(todo)
+);
+
+export const deleteTodoAsync = createAsyncThunk(
+  'todos/deleteTodo',
+  async (todo: Todo) => deleteTodo(todo)
+);
+
+export const createTodoAsync = createAsyncThunk(
+  'todos/createTodo',
+  async (text: string) => createTodo(text)
 );
 
 export const todosSlice = createSlice({
